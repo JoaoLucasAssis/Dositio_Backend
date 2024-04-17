@@ -57,3 +57,7 @@ Agora você está pronto para começar a trabalhar em sua nova branch!
     </td>
   </tr>
 </table>
+
+## Licença
+
+Este projeto é distribuído sob a Licença MIT. Sinta-se à vontade para usar, modificar e distribuir este código conforme necessário.
