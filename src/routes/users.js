@@ -1,5 +1,5 @@
 /** @type{import('fastify').FastifyPluginAsync<>} */
-import { USER_NOT_FOUND, USER_NOT_ADMIN } from "../../../src/libs/error.js"
+import { USER_NOT_FOUND, USER_NOT_ADMIN } from "../libs/error.js"
 
 export default async function user(app, options) {
     const mongodb_users = app.mongo.db.collection('users')
