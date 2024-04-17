@@ -40,3 +40,20 @@ git checkout develop
 Agora você está pronto para começar a trabalhar em sua nova branch!
 </p>
 </details>
+
+## Colaboradores
+
+<table>
+  <tr>
+  <!-- João Lucas -->
+    <td align="center">
+      <a href="https://github.com/JoaoLucasAssis">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwxCRWlkfeigdbif83ap111RPNlGARl02wOF5OvW9zUA&s" width="100px;" height="100px;" alt="Foto do João Lucas"/><br>
+        <sub>
+          <b>JoaoLucasAssis</b>
+        </sub>
+      </a>
+    </td>
+    </td>
+  </tr>
+</table>
