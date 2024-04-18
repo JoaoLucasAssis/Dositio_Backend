@@ -2,10 +2,10 @@
   "name": "dositio",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "test": "c8 node --test-reporter=spec test.js"
+    "test": "c8 node src/test.cjs"
   },
   "type": "module",
   "author": "João Oliveira",
