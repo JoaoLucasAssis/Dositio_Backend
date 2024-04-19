@@ -55,7 +55,9 @@ npm install
 </details>
 
 ## Configuração do MongoDB
-
+<details>
+<summary>Clique aqui!</summary>
+<p>
 O projeto utiliza o MongoDB como banco de dados. Abaixo estão os exemplos das coleções e seus campos:
 
 ### Coleção "produtos"
@@ -88,6 +90,8 @@ O projeto utiliza o MongoDB como banco de dados. Abaixo estão os exemplos das c
   "admin": false
 }
 ```
+</p>
+</details>
 
 ## Executando o Projeto
 
