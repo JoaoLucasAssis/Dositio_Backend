@@ -3,16 +3,17 @@ import { equal, deepEqual } from 'node:assert';
 import { builder, options } from './app.js';
 import { access } from 'node:fs';
 
-const jwtValue = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWF0aGV1cyIsImlhdCI6MTcxMjY5Nzc4MX0.tb86bidxFw0aVwDm6l7RdXFB7RqxVrCf3bCosif0Fkg'
+const jwtToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWF0aGV1cyIsImlhdCI6MTcxMjY5Nzc4MX0.tb86bidxFw0aVwDm6l7RdXFB7RqxVrCf3bCosif0Fkg'
+const adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiam9hbyIsImFkbWluIjp0cnVlLCJpYXQiOjE3MTM1MjU1NzN9.tvfz1dYF0SMjuFWHTgV_ixOeQKF0oFoY7uzdcygO6zo'
 
 const CreateProductTest = {
-    name: 'TestProduct11',
+    name: 'TestProduct',
     qtd: '15',
-    cat_id: '6616ca6fc0c1625999b9ef7f'
+    cat_id: '66224d85930b03e1d408f6b5'
 }
 
-const CreateCategorieTest = {
-    name: 'TestCategorie',
+const CreateCategoryTest = {
+    name: 'TestCategory',
     img_url: 'https://www.modernenglishteacher.com/media/26176/rsz_testing_2.jpg'
 }
 
@@ -31,19 +32,19 @@ const CreateUserAdminTest = {
 const UpdateProductTest = {
     name: 'TestProduct700',
     qtd: '10',
-    cat_id: '6616ca6fc0c1625999b9ef7f'
+    cat_id: '66224d85930b03e1d408f6b5'
 }
 
 const UpdateCategorieTest = {
-    name: 'Testedcategorie',
+    name: 'Testedcategory',
     img_url: 'https://www.effiliation.com/wp-content/uploads/2018/10/test.png'
     
 }
 
 const AlreadyExists = {
-    name: 'TestProduct',
+    name: 'TestProduct99',
     qtd: 100,
-    cat_id: '6616c8ef2550bf9d500d198d'
+    cat_id: '66224d85930b03e1d408f6b5'
 }
 
 // ================================
@@ -99,7 +100,7 @@ describe('### Tests for unauthenticated routes', async(t) => {
 
             const response = await app.inject({
                 method: 'GET',
-                url: '/products/6616ca5a7c88395ea9a658aa'
+                url: '/products/66224d35930b03e1d408f6b3'
             })
             equal(response.statusCode, 200)
         })
@@ -127,7 +128,7 @@ describe('### Tests for unauthenticated routes', async(t) => {
             })
             const response = await app.inject({
                 method: 'GET',
-                url: '/categories/6616c923616ab9efb0a94e97'
+                url: '/categories/66224d85930b03e1d408f6b5'
             })
             equal(response.statusCode, 200)
         })
@@ -141,7 +142,7 @@ describe('### Tests for unauthenticated routes', async(t) => {
             })
             const response = await app.inject({
                 method: 'GET',
-                url: '/categories/:id/products'
+                url: '/categories/66224d85930b03e1d408f6b5/products'
             })
             equal(response.statusCode, 200)
         })
@@ -159,7 +160,7 @@ describe('### Tests for unauthenticated routes', async(t) => {
 
             const response = await app.inject({
                 method: 'PUT',
-                url: '/categories/6616ca5a7c88395ea9a658a9',
+                url: '/categories/66224d85930b03e1d408f6b5',
                 body: UpdateCategorieTest,
                 headers: {
                     
@@ -176,15 +177,14 @@ describe('### Tests for unauthenticated routes', async(t) => {
                 await app.close()
             })
 
-            let originalString = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWF0aGV1cyIsImlhdCI6MTcxMjY5Nzc4MX0.tb86bidxFw0aVwDm6l7RdXFB7RqxVrCf3bCosif0Fkg"
-            let newString = originalString.replace("e", "")
+            let invalidJwtToken = jwtToken.replace("e", "")
 
             const response = await app.inject({
                 method: 'PUT',
-                url: '/categories/6616ca5a7c88395ea9a658a9',
+                url: '/categories/66224d85930b03e1d408f6b5',
                 body: UpdateCategorieTest,
                 headers: {
-                    'x-access-token': newString
+                    'x-access-token': invalidJwtToken
                 }
             });
             equal(response.statusCode, 401)
@@ -203,7 +203,7 @@ describe('### Tests for unauthenticated routes', async(t) => {
                 url: '/products',
                 body: AlreadyExists,
                 headers: {
-                    'x-access-token': jwtValue
+                    'x-access-token': jwtToken
                 }
             })
             equal(response.statusCode, 412)
@@ -229,9 +229,9 @@ describe('### Tests for authenticated routes', async(t) => {
             const response = await app.inject({
                 method: 'POST',
                 url: '/categories',
-                body: CreateCategorieTest,
+                body: CreateCategoryTest,
                 headers: {
-                    'x-access-token': jwtValue
+                    'x-access-token': jwtToken
                 }
             })
             equal(response.statusCode, 201)
@@ -247,10 +247,10 @@ describe('### Tests for authenticated routes', async(t) => {
 
             const response = await app.inject({
                 method: 'PUT',
-                url: '/categories/6616ca5a7c88395ea9a658a9',
+                url: '/categories/66224d85930b03e1d408f6b5',
                 body: UpdateCategorieTest,
                 headers: {
-                    'x-access-token': jwtValue
+                    'x-access-token': jwtToken
                 }
             })
             equal(response.statusCode, 204)
@@ -266,9 +266,9 @@ describe('### Tests for authenticated routes', async(t) => {
 
             const response = await app.inject({
                 method: 'DELETE',
-                url: '/categories/661d649a12b97fdbce8aa7b1',
+                url: '/categories/66224d85930b03e1d408f6b5',
                 headers: {
-                    'x-access-token': jwtValue
+                    'x-access-token': jwtToken
                 }
             });
             equal(response.statusCode, 204)
@@ -287,7 +287,7 @@ describe('### Tests for authenticated routes', async(t) => {
                 url: '/products',
                 body: CreateProductTest,
                 headers: {
-                    'x-access-token': jwtValue
+                    'x-access-token': jwtToken
                 }
 
             })
@@ -304,10 +304,10 @@ describe('### Tests for authenticated routes', async(t) => {
 
             const response = await app.inject({
                 method: 'PUT',
-                url: '/products/6616d5f4354be05aa2f2f9db',
+                url: '/products/66224d35930b03e1d408f6b3',
                 body: UpdateProductTest,
                 headers: {
-                    'x-access-token': jwtValue
+                    'x-access-token': jwtToken
                 }
 
             });
@@ -324,9 +324,9 @@ describe('### Tests for authenticated routes', async(t) => {
 
             const response = await app.inject({
                 method: 'DELETE',
-                url: '/products/66197b2a04864e4f88a09220',
+                url: '/products/66224d35930b03e1d408f6b3',
                 headers: {
-                    'x-access-token': jwtValue
+                    'x-access-token': jwtToken
                 }
 
             });
@@ -346,7 +346,7 @@ describe('### Tests for authenticated routes', async(t) => {
                 url: '/register',
                 body: CreateUserTest,
                 headers: {
-                    'x-access-token': jwtValue
+                    'x-access-token': jwtToken
                 }
 
             });
@@ -366,7 +366,8 @@ describe('### Tests for authenticated routes', async(t) => {
                 url: '/register-admin',
                 body: CreateUserAdminTest,
                 headers: {
-                    'x-access-token': jwtValue
+                    'x-access-token': jwtToken,
+                    'admin-token': adminToken
                 }
 
             });
@@ -386,7 +387,7 @@ describe('### Tests for authenticated routes', async(t) => {
                 url: '/login',
                 body: CreateUserTest,
             });
-            equal(response.x-access-token, app.jwt.sign(CreateUserAdminTest))
+            equal(response.statusCode, 200);
         })
 
         // POST /login-admin
@@ -402,7 +403,7 @@ describe('### Tests for authenticated routes', async(t) => {
                 url: '/login-admin',
                 body: CreateUserAdminTest,
             });
-            equal(response.admin-token, app.jwt.sign(CreateUserAdminTest))
+            equal(response.statusCode, 200);
         })
     })
 })
