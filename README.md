@@ -95,6 +95,32 @@ O projeto utiliza o MongoDB como banco de dados. Abaixo estão os exemplos das c
 
 ## Executando o Projeto
 
+Siga os seguintes  passos para executar o projeto:
+
+* Crie um arquivo `.env` no diretório raiz do projeto baseado no arquivo `.env.sample` já existente.
+  
+* Altere as configurações do arquivo ***.env*** para utilizar os ambientes desejados.
+
+Para o ambiente de desenvolvimento, foi utilizado a seguinte configuração:
+
+```c
+STAGE = 'dev'
+PORT= '3000'
+HOST= '127.0.0.1'
+JWT_SECRET= 'Abcd@1234'
+DB_URL = 'mongodb://localhost:27017/dositio'
+```
+
+Para o ambiente de teste, foi utilizado a seguinte configuração:
+
+```c
+STAGE = 'test'
+PORT= '3000'
+HOST= '127.0.0.1'
+JWT_SECRET= 'Abcd@1234'
+DB_URL = 'mongodb://localhost:27017/teste'
+```
+
 Após a instalação e configuração, você pode executar o projeto usando o seguinte comando:
 
 ```node
