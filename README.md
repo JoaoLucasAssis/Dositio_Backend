@@ -134,7 +134,7 @@ Siga os seguintes  passos para executar o projeto:
 
 Para o ambiente de desenvolvimento, foi utilizado a seguinte configuração:
 
-```c
+```javascript
 STAGE = 'dev'
 PORT= '3000'
 HOST= '127.0.0.1'
@@ -144,7 +144,7 @@ DB_URL = 'mongodb://localhost:27017/dositio'
 
 Para o ambiente de teste, foi utilizado a seguinte configuração:
 
-```c
+```javascript
 STAGE = 'test'
 PORT= '3000'
 HOST= '127.0.0.1'
