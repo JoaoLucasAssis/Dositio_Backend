@@ -11,9 +11,10 @@ export default async function user(app, options) {
                 properties: {
                     id: { type: 'integer' },
                     name: { type: 'string' },
-                    password: {type: 'string'}
+                    password: {type: 'string'},
+                    admin: {type: 'boolean'}
                 },
-                required: ['name', 'password']
+                required: ['name', 'password', 'admin']
             }
         },
         config: {
