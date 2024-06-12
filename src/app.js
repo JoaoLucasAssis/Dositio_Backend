@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import mongodb from '@fastify/mongodb'
 import autoload from '@fastify/autoload'
 import jwt from '@fastify/jwt'
+import cors from '@fastify/cors'
 import { fileURLToPath } from 'url'
 import path from 'path'
 
@@ -29,6 +30,11 @@ export async function builder(opts){
 
     await app.register(jwt, {
         secret: opts.jwt_secret
+    })
+
+    await app.register(cors, {
+        origin: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE']
     })
 
     await app.register(autoload, {
